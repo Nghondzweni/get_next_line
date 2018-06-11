@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnghondz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/07 17:14:17 by tnghondz          #+#    #+#             */
-/*   Updated: 2018/06/09 14:00:30 by tnghondz         ###   ########.fr       */
+/*   Created: 2018/05/28 22:56:32 by tnghondz          #+#    #+#             */
+/*   Updated: 2018/05/28 22:58:15 by tnghondz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# define BUFF_SIZE 8
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	slen;
+	size_t	dlen;
 
-# include <fcntl.h>
-
-int		find_nl(char **save_buff, char **line);
-int		get_next_line(int const fd, char **line);
-char	*join(char *s1, char *s2);
-
-#endif
+	slen = ft_strlen(src);
+	dlen = ft_strlen(dst);
+	i = 0;
+	if (size < dlen)
+	{
+		return (size + slen);
+	}
+	while (src[i] != '\0' && (dlen + i + 1) < size)
+	{
+		dst[dlen + i] = src[i];
+		i++;
+	}
+	dst[dlen + i] = '\0';
+	return (dlen + slen);
+}

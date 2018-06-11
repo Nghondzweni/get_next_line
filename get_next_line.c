@@ -6,12 +6,11 @@
 /*   By: tnghondz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 16:23:27 by tnghondz          #+#    #+#             */
-/*   Updated: 2018/06/08 14:37:41 by tnghondz         ###   ########.fr       */
+/*   Updated: 2018/06/11 15:42:43 by tnghondz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
-#include <stdio.h>
 #include "get_next_line.h"
 
 int		find_nl(char **save_buff, char **line)
@@ -42,7 +41,7 @@ int		get_next_line(int const fd, char **line)
 		if (find_nl(&save_buff, line))
 			return (1);
 	}
-	if (bytes_read <= 0)
+	if (bytes_read < 0)
 		return (-1);
 	if (save_buff && *save_buff)
 	{
@@ -50,6 +49,8 @@ int		get_next_line(int const fd, char **line)
 		ft_strdel(&save_buff);
 		return (1);
 	}
+	if (bytes_read)
+		return (1);
 	return (0);
 }
 

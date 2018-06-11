@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnghondz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/07 17:14:17 by tnghondz          #+#    #+#             */
-/*   Updated: 2018/06/09 14:00:30 by tnghondz         ###   ########.fr       */
+/*   Created: 2018/05/31 02:46:49 by tnghondz          #+#    #+#             */
+/*   Updated: 2018/05/31 03:14:52 by tnghondz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# define BUFF_SIZE 8
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	div;
+	char	c;
+	long	temp_n;
 
-# include <fcntl.h>
-
-int		find_nl(char **save_buff, char **line);
-int		get_next_line(int const fd, char **line);
-char	*join(char *s1, char *s2);
-
-#endif
+	temp_n = (long)n;
+	div = 1;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		temp_n *= -1;
+	}
+	if (n == 0)
+		ft_putchar_fd('0', fd);
+	while (div <= temp_n)
+		div *= 10;
+	div /= 10;
+	while (div != 0)
+	{
+		c = (temp_n / div) + 48;
+		ft_putchar_fd(c, fd);
+		temp_n %= div;
+		div /= 10;
+	}
+}
